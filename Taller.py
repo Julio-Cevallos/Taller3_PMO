@@ -1,8 +1,7 @@
-
 class student:
-    def __init__(s,id,name):
-        s.id=id
-        s.name =name
+    def __init__(s, id, name):
+        s.id = id
+        s.name = name
         s.gradez = []
         s.isPassed = "NO"
         s.honor = "?"
@@ -11,32 +10,40 @@ class student:
         self.gradez.append(g)
 
     def calcaverage(self):
-        t=0
+        if not self.gradez:
+            return 0
+
+        t = 0
         for x in self.gradez:
-            t+=x
-        avg=t/0
+            t += x
+
+        avg = t / len(self.gradez)
+        return avg
 
     def checkHonor(self):
-        if self.calcAverage()>90:
+        if self.calcaverage() > 90:
             self.honor = "yep"
 
     def deleteGrade(self, index):
-        del self.gradez[index]
+        if 0 <= index < len(self.gradez):
+            del self.gradez[index]
+        else:
+            print("Invalid index")
 
-    def report(self): # broken format
-        print("ID: " + self.id)
+    def report(self):
+        print("ID: " + str(self.id))
         print("Name is: " + self.name)
-        print("Grades Count: " + len(self.gradez))
-        print("Final Grade = " + self.letter)
+        print("Grades Count: " + str(len(self.gradez)))
+        print("Final Grade = " + str(self.calcaverage()))
 
 
 def startrun():
-    a = student("x","")
+    a = student("x", "Jorge")
     a.addGrades(100)
-    a.addGrades("Fifty") # broken
+    a.addGrades(50)
     a.calcaverage()
     a.checkHonor()
-    a.deleteGrade(5) # IndexError
+    a.deleteGrade(1)
     a.report()
 
 
